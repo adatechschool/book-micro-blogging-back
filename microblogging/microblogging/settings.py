@@ -15,8 +15,10 @@ import environ
 import os
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
 
+# Access environment variables
 env = environ.Env()
 environ.Env.read_env()
 
@@ -89,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres.rhnhdilmyjihibpwkcut',
-        'PASSWORD': '*Analix-2024!',
+        'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
         'HOST': 'aws-0-eu-west-3.pooler.supabase.com',
         'PORT': '6543',
         
