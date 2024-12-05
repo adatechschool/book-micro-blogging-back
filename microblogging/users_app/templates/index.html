@@ -13,6 +13,8 @@
       <script type="module" src="http://localhost:5173/src/main.js"></script>
       <script type="text/javascript">
         window.initialAppState = "{{ user.username }}";
+        window.initialPost = "{{ post.content }}";
+        window.users = {{users|safe}}
       </script>
     </body>
   </body>
