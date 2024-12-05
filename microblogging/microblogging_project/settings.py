@@ -14,6 +14,7 @@ from pathlib import Path
 import environ
 import os
 from dotenv import load_dotenv
+# from app_users import models
 
 # Load environment variables from .env file
 load_dotenv()
@@ -50,6 +51,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+
+    'users_app',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'microblogging.urls'
+ROOT_URLCONF = 'microblogging_project.urls'
 
 TEMPLATES = [
     {
@@ -81,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'microblogging.wsgi.application'
+WSGI_APPLICATION = 'microblogging_project.wsgi.application'
 
 
 # Database
@@ -95,7 +99,6 @@ DATABASES = {
         'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
         'HOST': 'aws-0-eu-west-3.pooler.supabase.com',
         'PORT': '6543',
-        
     }
 }
 
