@@ -1,7 +1,7 @@
 .DS_Store
 .env
 my_venv/*
-__pycache__
-*/__pycache__/
-*/*/__pycache__/
-*/*/*/__pycache__/
+__pycache__/*
+*/__pycache__/*
+*/*/__pycache__/*
+*/*/*/__pycache__/*
