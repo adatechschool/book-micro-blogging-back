@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from . import templates
+from users_app import templates
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
 from users_app.models import User
 
@@ -9,7 +9,7 @@ def index(request):
     context = {
         'users': users,
     } 
-    return render(request, 'first_template.html', context)
+    return render(request, 'index.html', context)
 
 def fetch_users(request):
     data = fetch_from_supabase('users')
