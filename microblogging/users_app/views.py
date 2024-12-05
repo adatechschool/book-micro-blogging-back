@@ -7,7 +7,7 @@ from users_app.models import User
 def index(request):
     users = User.objects.all().values()
     context = {
-        'users': users,
+        'user': users[0],
     } 
     return render(request, 'index.html', context)
 
