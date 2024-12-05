@@ -66,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'microblogging.urls'
+ROOT_URLCONF = 'microblogging_project.urls'
 
 TEMPLATES = [
     {
@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'microblogging.wsgi.application'
+WSGI_APPLICATION = 'microblogging_project.wsgi.application'
 
 
 # Database
