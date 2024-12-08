@@ -3,8 +3,19 @@
         <ul>
             {% for post in posts %}
             <li>
-                Email : {{ post.user.email }} <br>
+                Username : {{ post.user.username }} <br>
                 Post : {{ post.content }} <br>
+                <!-- on récupère tous les tags via la méthode .all()--> 
+                Tags : {% if post.tags.all %}
+                <!-- on parcourt les tags et on affiche chacun d'entre eux-->
+                            {% for tag in post.tags.all %} 
+                            <!-- ajout d'une gestion de virugle si plusieurs tags-->
+                                {{tag.tag}} {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            Aucun tag
+                        {% endif %}
+                        <br>
                 Date : {{ post.created_at }} 
             </li> <br>
             {% endfor %}
