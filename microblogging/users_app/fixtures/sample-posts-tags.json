@@ -1,0 +1,41 @@
+[{
+    "model": "users_app.post_tags",
+    "pk": 1,
+    "fields": {
+        "post_id": 1,
+        "tag_id": 2
+    }
+}, 
+{
+    "model": "users_app.post_tags",
+    "pk": 2,
+    "fields": {
+        "post_id": 2,
+        "tag_id": 3
+    }  
+},
+{
+    "model": "users_app.post_tags",
+    "pk": 3,
+    "fields": {
+        "post_id": 3,
+        "tag_id": 4
+    }  
+},
+{
+    "model": "users_app.post_tags",
+    "pk": 4,
+    "fields": {
+        "post_id": 4,
+        "tag_id": 4
+    }  
+},
+{
+    "model": "users_app.post_tags",
+    "pk": 5,
+    "fields": {
+        "post_id": 5,
+        "tag_id": 1
+    }  
+}
+]
