@@ -4,7 +4,7 @@ from users_app import templates
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
 
 # from users_app.models import User
-from users_app.models import Post, User
+from users_app.models import Post, User, Tag
 
 # def index(request):
 #     users = User.objects.all().values()
@@ -17,9 +17,11 @@ from users_app.models import Post, User
 def index(request):
     posts = Post.objects.all()
     context = {
-        'posts': posts,    
+        'posts': posts, 
     } 
     print(f"🦄 {posts}")
+
+    
     return render(request, 'first_template.html', context)
 
 def users(request):
