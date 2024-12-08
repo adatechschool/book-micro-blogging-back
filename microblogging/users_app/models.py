@@ -36,7 +36,7 @@ class Tag(models.Model):
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, related_name="posts")
     parent_id = models.IntegerField(default=None, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
