@@ -1,0 +1,14 @@
+[
+    {"model": "users_app.tag",
+    "pk": 1,
+    "fields": {"tag" : "#lovereading"}}, 
+    {"model": "users_app.tag",
+    "pk": 2,
+    "fields": {"tag" : "#horrostory"}}, 
+    {"model": "users_app.tag",
+    "pk": 3,
+    "fields": {"tag": "#romance"}}, 
+    {"model": "users_app.tag",
+    "pk": 4,
+    "fields": {"tag": "#booklover"}}
+]
