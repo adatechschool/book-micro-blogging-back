@@ -17,6 +17,18 @@
                         {% endif %}
                         <br>
                 Date : {{ post.created_at }} 
+                <br>
+                Commentaires: {% if post.parent_id.all %}
+                                    {% for comment in post.parent_id.all %}
+                                        <!--afficher contenu correspondant au parent_id-->
+                                            {% if comment == post.id.all %}
+                                                {{post.id.content}} {% if not forloop.last %}, {% endif %}
+                                            {% endif %}
+                                    {% endfor %}        
+                                {% else %}
+                                    Aucun commentaire
+                                {% endif %}             
+                                <br> 
             </li> <br>
             {% endfor %}
         </ul>

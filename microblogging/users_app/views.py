@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core import serializers
+from django.http import HttpResponse
+from django.core import serializers
+from django.http import HttpResponse
 from users_app import templates
 from django.views.decorators.csrf import csrf_exempt
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
@@ -14,12 +18,14 @@ from users_app.models import Post, User, Tag
 #     print(f"🦄 {users}")
 #     return render(request, 'first_template.html', context)
 
-def index(request):
+def all_posts(request):
     posts = Post.objects.all()
     context = {
         'posts': posts,
     } 
     print(f"🦄 {posts}")
+   
+   
     return render(request, 'first_template.html', context)
 
 def users(request):
@@ -50,3 +56,13 @@ def insert_user(request):
             return JsonResponse({
                 "result": "⛔️ L'utilisateur (email et/ou username) existe déjà."
             }, status=403)
+
+
+def user_profile(request, id):
+    queryUserPosts = Post.objects.filter(user_id=id)
+    userPosts = serializers.serialize('json', queryUserPosts)
+    
+    queryUserInfo = User.objects.filter(id=id)
+    userInfo = serializers.serialize('json', queryUserInfo)
+    
+    return JsonResponse(userInfo, safe=False)
