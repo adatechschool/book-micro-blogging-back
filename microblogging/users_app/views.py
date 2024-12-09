@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponse
-from django.core import serializers
-from django.http import HttpResponse
 from users_app import templates
 from django.views.decorators.csrf import csrf_exempt
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
@@ -24,7 +22,6 @@ def all_posts(request):
         'posts': posts,
     } 
     print(f"🦄 {posts}")
-   
    
     return render(request, 'first_template.html', context)
 
