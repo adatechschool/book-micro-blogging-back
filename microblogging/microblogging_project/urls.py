@@ -23,7 +23,9 @@ from users_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users', views.users, name='users'),
-    path('index', views.index, name='index'),
-    path('fetch-users/', views.fetch_users, name='fetch_users'),
+    path('home', views.all_posts, name='home'),
+    path('login/', views.fetch_users, name='fetch_users'),
+    path('profile/<int:id>/', views.user_profile, name='profile'),
+    path('coucou-users/', views.fetch_users, name='fetch_users'),
     path('insert-user/', views.insert_user, name='insert_user'),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]) 
