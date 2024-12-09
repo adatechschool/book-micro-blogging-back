@@ -1,4 +1,6 @@
 import requests
+import json
+from django.http import JsonResponse
 from django.conf import settings
 
 SUPABASE_URL = settings.SUPABASE_URL
@@ -17,5 +19,13 @@ def fetch_from_supabase(endpoint):
 
 def insert_to_supabase(endpoint, data):
     url = f"{SUPABASE_URL}/rest/v1/{endpoint}"
-    response = requests.post(url, json=data, headers=headers)
-    return response.json()
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        if response.status_code == 201:
+            print(f"Success: {response.status_code} - {response.text}")
+            return True
+        else:
+            print(f"Error: {response.status_code} - {response.text}")
+            return False
+    except:
+        return False
