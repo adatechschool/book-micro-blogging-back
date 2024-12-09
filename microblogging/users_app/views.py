@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import json
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponse
@@ -24,18 +25,39 @@ def all_posts(request):
     print(f"🦄 {posts}")
    
     return render(request, 'first_template.html', context)
+# post_content_list : string list
+# post_username_list : string list
+
+# for i = 0
+#   post_content_list[i] + post_username_list[i]
+#
+# post_list : (string * string) list
+#              content * username
+
+def merge (lst1, lst2):
+    return [(lst1[i]["content"], lst2[i]["user_id"]) for i in range(0, len(lst1))]
 
 def users(request):
-    users = User.objects.first()
-    posts = Post.objects.first()
+    users = User.objects.all().values('username')
+    users_list = list(users)
+    
+    posts_content = Post.objects.all().values('content')
+    posts_content_list = list(posts_content)
+    
+    posts_username = Post.objects.all().values('user_id')
+    posts_username_list = list(posts_username)
+    
+    posts_content_username = merge(posts_content_list, posts_username_list)
+    
     context = {
-        'users': [{"username":users.username}]
+        'users': json.dumps(users_list),
+        'posts_content_username': json.dumps(posts_content_username),
     } 
     return render(request, 'index.html', context)
 
-
 def fetch_users(request):
     data = fetch_from_supabase('users_app_user')
+    return render(request, "users.html")
     return JsonResponse(data, safe=False)
 
 @csrf_exempt

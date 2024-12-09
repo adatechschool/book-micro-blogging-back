@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Django + Svelte</title>
+    <title>My Little Books</title>
     {% load static %}
   </head>
   <body>
@@ -12,10 +12,13 @@
       <script type="module" src="http://localhost:5173/@vite/client"></script>
       <script type="module" src="http://localhost:5173/src/main.js"></script>
       <script type="text/javascript">
-        window.initialAppState = "{{ user.username }}";
-        window.initialPost = "{{ post.content }}";
-        window.users = {{users|safe}}
+        window.postsContentUsername = JSON.parse(
+          "{{ posts_content_username|escapejs }}"
+        );
+        window.users = JSON.parse("{{ users|escapejs }}");
       </script>
     </body>
   </body>
 </html>
+
+{% comment %} posts : contenu username date tags {% endcomment %}
