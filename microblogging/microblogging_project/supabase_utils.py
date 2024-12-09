@@ -1,6 +1,4 @@
 import requests
-import json
-from django.http import JsonResponse
 from django.conf import settings
 
 SUPABASE_URL = settings.SUPABASE_URL

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from users_app import templates
 from django.views.decorators.csrf import csrf_exempt
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
