@@ -3,8 +3,8 @@ from django.http import JsonResponse
 from users_app import templates
 from django.views.decorators.csrf import csrf_exempt
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
-from users_app.models import User, Post
 import json
+from users_app.models import Post, User, Tag
 
 # def index(request):
 #     users = User.objects.all().values()
@@ -21,6 +21,15 @@ def index(request):
     } 
     print(f"🦄 {posts}")
     return render(request, 'first_template.html', context)
+
+def users(request):
+    users = User.objects.first()
+    posts = Post.objects.first()
+    context = {
+        'users': [{"username":users.username}]
+    } 
+    return render(request, 'index.html', context)
+
 
 def fetch_users(request):
     data = fetch_from_supabase('users_app_user')

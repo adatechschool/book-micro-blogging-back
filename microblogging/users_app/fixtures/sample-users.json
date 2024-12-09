@@ -1,0 +1,26 @@
+[
+    {
+        "model": "users_app.user",
+        "pk": 1,
+        "fields": {
+            "email": "alice@example.com",
+            "username": "alice",
+            "password": "hashed_password_1",
+            "bio": "Software engineer and cat lover.",
+            "created_at": "2024-12-01T10:00:00Z",
+            "updated_at": "2024-12-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "users_app.user",
+        "pk": 2,
+        "fields": {
+            "email": "bob@example.com",
+            "username": "bob",
+            "password": "hashed_password_2",
+            "bio": "Photography enthusiast.",
+            "created_at": "2024-12-02T11:00:00Z",
+            "updated_at": "2024-12-02T11:00:00Z"
+        }
+    }
+]
