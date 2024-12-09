@@ -1,0 +1,17 @@
+<html>
+
+<body>
+    <ul>
+        {% for post in posts_details %}
+        <li>
+            Username : {{ post.user.username }} <br>
+            Post : {{ post.content }} <br>
+            Date : {{ post.created_at }} <br>
+            Tag : {{ post.tag }} <br>
+            <br>
+        </li> <br>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

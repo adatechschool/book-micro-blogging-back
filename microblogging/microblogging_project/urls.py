@@ -28,4 +28,5 @@ urlpatterns = [
     path('profile/<int:id>/', views.user_profile, name='profile'),
     path('coucou-users/', views.fetch_users, name='fetch_users'),
     path('insert-user/', views.insert_user, name='insert_user'),
+    path('posts-details', views.fetch_posts_details, name='fetch_posts_details'),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0]) 

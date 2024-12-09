@@ -1,21 +1,12 @@
-from django.shortcuts import render
 import json
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.core import serializers
-from django.http import HttpResponse
-from users_app import templates
 from django.views.decorators.csrf import csrf_exempt
-from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
-import json
+from django.db.models import Prefetch
+from users_app import templates
 from users_app.models import Post, User, Tag
-
-# def index(request):
-#     users = User.objects.all().values()
-#     context = {
-#         'users': users,
-#     } 
-#     print(f"🦄 {users}")
-#     return render(request, 'first_template.html', context)
+from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
 
 def all_posts(request):
     posts = Post.objects.all()
@@ -25,6 +16,15 @@ def all_posts(request):
     print(f"🦄 {posts}")
    
     return render(request, 'first_template.html', context)
+
+def fetch_posts_details(request):
+    posts_details = Post.objects.select_related('user')
+    context = {
+        'posts_details': posts_details,
+    }
+    print(f"🦄 {posts_details}")
+    return render(request, 'second_template.html', context)
+
 # post_content_list : string list
 # post_username_list : string list
 
@@ -75,7 +75,6 @@ def insert_user(request):
             return JsonResponse({
                 "result": "⛔️ L'utilisateur (email et/ou username) existe déjà."
             }, status=403)
-
 
 def user_profile(request, id):
     queryUserPosts = Post.objects.filter(user_id=id)
