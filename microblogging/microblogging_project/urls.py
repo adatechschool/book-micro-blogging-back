@@ -23,6 +23,7 @@ from users_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users', views.users, name='users'),
+    path('profile', views.users, name='profile'),
     path('home', views.all_posts, name='home'),
     path('login/', views.fetch_users, name='fetch_users'),
     path('profile/<int:id>/', views.user_profile, name='profile'),
