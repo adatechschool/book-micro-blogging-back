@@ -1,16 +1,17 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=180, unique=True)
-    password = models.CharField(max_length=255)
-    bio = models.TextField(max_length=500)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+# class User(models.Model):
+#     email = models.EmailField(unique=True)
+#     username = models.CharField(max_length=180, unique=True)
+#     password = models.CharField(max_length=255)
+#     bio = models.TextField(max_length=500)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.username
+#     def __str__(self):
+#         return self.username
 
 class Follower(models.Model):
     follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
