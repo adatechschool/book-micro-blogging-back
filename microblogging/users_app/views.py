@@ -9,16 +9,20 @@ from django.views.decorators.csrf import csrf_exempt
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
 import json
 from users_app.models import Post, User, Tag, Follower
-from users_app.forms import UploadPost
+
 
 
 def all_posts(request):
-    posts = Post.objects.all()
+    #posts = Post.objects.all()
+    posts = Post.objects.select_related('user').all()
+    print(f"🦀 {posts}")
     list_posts = []
     
     for post in posts:
         p = model_to_dict(post)
+        print(f"🪲 {p}")
         p["tags"] = []
+        p["user"] = model_to_dict(post.user)["username"]
         for tag in post.tags.all():
             p["tags"].append(tag.tag)
         list_posts.append(p)
@@ -30,14 +34,7 @@ def all_posts(request):
     print(f"🦄 {j}")
    
     return render(request, 'first_template.html', context)
-# post_content_list : string list
-# post_username_list : string list
 
-# for i = 0
-#   post_content_list[i] + post_username_list[i]
-#
-# post_list : (string * string) list
-#              content * username
 
 def merge (lst1, lst2):
     return [(lst1[i]["content"], lst2[i]["user_id"]) for i in range(0, len(lst1))]
@@ -60,6 +57,7 @@ def users(request):
         'posts_content_username': json.dumps(posts_content_username),
     } 
     return render(request, 'index.html', context)
+
 
 def fetch_users(request):
     data = fetch_from_supabase('users_app_user')
@@ -120,12 +118,10 @@ def user_profile(request, id):
     
     return JsonResponse(response_data, safe=True)
 
-#EN CONSTRUCTION, PAS FONCTIONNEL
+
 # @csrf_exempt
 # def insert_post(request):
-#     form = UploadPost(request.POST, request.FILES)
-#     print(request.FILES)
-#     return render(request, 'form_template.html', {'form': form})
+
 
 
 
