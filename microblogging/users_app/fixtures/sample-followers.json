@@ -1,0 +1,58 @@
+[
+    {
+        "model": "users_app.follower",
+        "pk": 1,
+        "fields": {
+            "followed_id": 2,
+            "follower_id":1
+        }
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 2,
+        "fields": {
+            "followed_id": 20,
+            "follower_id":1
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 3,
+        "fields": {
+            "followed_id": 6,
+            "follower_id":1
+        }   
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 4,
+        "fields": {
+            "followed_id": 1,
+            "follower_id":2
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 5,
+        "fields": {
+            "followed_id": 23,
+            "follower_id":2
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 6,
+        "fields": {
+            "followed_id": 5,
+            "follower_id":2
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 7,
+        "fields": {
+            "followed_id": 18,
+            "follower_id":1
+        } 
+    }
+]
