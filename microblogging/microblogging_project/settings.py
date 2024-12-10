@@ -71,7 +71,8 @@ ROOT_URLCONF = 'microblogging_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'microblogging_project/views/templates')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'microblogging_project/views/templates')], 
+        'DIRS': [os.path.join(BASE_DIR, 'users_app/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -145,3 +146,9 @@ STATICFILES_DIRS = [BASE_DIR / "../microblogging/users_app/frontend/dist", BASE_
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
