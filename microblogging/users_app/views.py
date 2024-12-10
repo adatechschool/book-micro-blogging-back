@@ -18,11 +18,13 @@ def all_posts(request):
     return render(request, 'first_template.html', context)
 
 def fetch_posts_details(request):
-    posts_details = Post.objects.select_related('user')
+    posts_details = Post.objects.select_related('user').prefetch_related('tags')
+    posts_json = serializers.serialize("json", posts_details)
+
     context = {
         'posts_details': posts_details,
     }
-    print(f"🦄 {posts_details}")
+    print(f"🦄 {posts_json}")
     return render(request, 'second_template.html', context)
 
 # post_content_list : string list
