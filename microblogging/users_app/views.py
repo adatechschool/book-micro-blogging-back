@@ -1,12 +1,11 @@
-from django.shortcuts import render
 import json
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
-from django.http import HttpResponse
 from users_app import templates
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
-import json
 from users_app.models import Post, User, Tag
 
 # def index(request):
@@ -17,6 +16,7 @@ from users_app.models import Post, User, Tag
 #     print(f"🦄 {users}")
 #     return render(request, 'first_template.html', context)
 
+@login_required
 def all_posts(request):
     posts = Post.objects.all()
     context = {
@@ -37,6 +37,7 @@ def all_posts(request):
 def merge (lst1, lst2):
     return [(lst1[i]["content"], lst2[i]["user_id"]) for i in range(0, len(lst1))]
 
+@login_required
 def users(request):
     users = User.objects.all().values('username')
     users_list = list(users)
@@ -55,6 +56,7 @@ def users(request):
     } 
     return render(request, 'index.html', context)
 
+@login_required
 def fetch_users(request):
     data = fetch_from_supabase('users_app_user')
     return render(request, "users.html")
@@ -76,7 +78,7 @@ def insert_user(request):
                 "result": "⛔️ L'utilisateur (email et/ou username) existe déjà."
             }, status=403)
 
-
+@login_required
 def user_profile(request, id):
     queryUserPosts = Post.objects.filter(user_id=id)
     userPosts = serializers.serialize('json', queryUserPosts)
