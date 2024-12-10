@@ -1,38 +1,39 @@
 import json
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.core import serializers
-from users_app import templates
+from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
-from users_app.models import Post, User, Tag
+from users_app import templates
+from users_app.models import Post, User, Tag, Follower
 
-# def index(request):
-#     users = User.objects.all().values()
-#     context = {
-#         'users': users,
-#     } 
-#     print(f"🦄 {users}")
-#     return render(request, 'first_template.html', context)
 
 @login_required
 def all_posts(request):
-    posts = Post.objects.all()
+    #posts = Post.objects.all()
+    posts = Post.objects.select_related('user').all()
+    print(f"🦀 {posts}")
+    list_posts = []
+    
+    for post in posts:
+        p = model_to_dict(post)
+        print(f"🪲 {p}")
+        p["tags"] = []
+        p["user"] = model_to_dict(post.user)["username"]
+        for tag in post.tags.all():
+            p["tags"].append(tag.tag)
+        list_posts.append(p)
+    print(f"🪼 {list_posts}")        
     context = {
-        'posts': posts,
-    } 
-    print(f"🦄 {posts}")
+        'posts': list_posts,
+    }
+    j = json.dumps(list_posts)
+    print(f"🦄 {j}")
    
     return render(request, 'first_template.html', context)
-# post_content_list : string list
-# post_username_list : string list
 
-# for i = 0
-#   post_content_list[i] + post_username_list[i]
-#
-# post_list : (string * string) list
-#              content * username
 
 def merge (lst1, lst2):
     return [(lst1[i]["content"], lst2[i]["user_id"]) for i in range(0, len(lst1))]
@@ -80,10 +81,48 @@ def insert_user(request):
 
 @login_required
 def user_profile(request, id):
-    queryUserPosts = Post.objects.filter(user_id=id)
-    userPosts = serializers.serialize('json', queryUserPosts)
+    query_user_posts = Post.objects.filter(user_id=id)
     
-    queryUserInfo = User.objects.filter(id=id)
-    userInfo = serializers.serialize('json', queryUserInfo)
+    #on transforme le queryset en liste de dictionnaires
+    posts_list = list(query_user_posts.values('id', 'user_id', 'content', 'parent_id', 'created_at'))
+    print(f"🐹 {posts_list}")
     
-    return JsonResponse(userInfo, safe=False)
+    query_user_info = User.objects.get(id=id)
+    print(f"🐻 {query_user_info} ")
+    
+    #on créée un dictionnaire User avec les info voulues
+    user_info =  {
+        'id': query_user_info.id,
+        'username': query_user_info.username,
+        'bio': query_user_info.bio
+    }
+    
+    print(f"🧘‍♂️ {user_info}")
+    print(type(user_info))
+    
+    query_following = Follower.objects.filter(follower_id=id)
+    
+    following_list = list(query_following.values('followed_id', 'follower_id'))
+    print(f"🍓 {following_list}")
+    
+    #on merge les info des posts et les infos du user dans un dictionnaire:
+    response_data = {
+        'user': user_info,
+        'posts': posts_list,
+        'following': following_list
+    }
+    
+    print(f"🍋 {response_data}")
+    print(type(response_data))
+    
+    return JsonResponse(response_data, safe=True)
+
+
+# @csrf_exempt
+# def insert_post(request):
+
+
+
+
+ 
+        
