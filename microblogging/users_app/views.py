@@ -27,12 +27,12 @@ def all_posts(request):
         list_posts.append(p)
     print(f"🪼 {list_posts}")        
     context = {
-        'posts': list_posts,
+        'posts': json.dumps(list_posts),
     }
     j = json.dumps(list_posts)
     print(f"🦄 {j}")
    
-    return render(request, 'first_template.html', context)
+    return render(request, 'home.html', context)
 
 
 def merge (lst1, lst2):

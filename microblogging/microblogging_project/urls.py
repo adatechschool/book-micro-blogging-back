@@ -23,9 +23,9 @@ from users_app import views
 urlpatterns = [
     path('', views.all_posts, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/login/', include('django.contrib.auth.urls'), name="login"),
     path('admin/', admin.site.urls),
-    path('users', views.users, name='users'),
-    path('login/', views.fetch_users, name='fetch_users'),
+    path('users', views.all_posts, name='users'),
     path('profile/<int:id>/', views.user_profile, name='profile'),
     path('coucou-users/', views.fetch_users, name='fetch_users'),
     path('insert-user/', views.insert_user, name='insert_user'),
