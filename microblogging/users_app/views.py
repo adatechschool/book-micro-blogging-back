@@ -13,7 +13,6 @@ from django.contrib.auth.models import User
 
 @login_required
 def all_posts(request):
-    #posts = Post.objects.all()
     posts = Post.objects.select_related('user').all()
     print(f"🦀 {posts}")
     list_posts = []
@@ -89,7 +88,8 @@ def user_profile(request, id):
     print(f"🐹 {posts_list}")
     
     query_user_info = AuthUser.objects.get(id=id)
-    print(f"🐻 {query_user_info} ")
+    user_info = model_to_dict(query_user_info)
+    print(f"🐻 {user_info} ")
     # print(f"🟢 {query_user_info.bio}")
     
     #on créée un dictionnaire User avec les info voulues
