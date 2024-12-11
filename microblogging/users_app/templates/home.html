@@ -13,11 +13,7 @@
       <script type="module" src="http://localhost:5173/@vite/client"></script>
       <script type="module" src="http://localhost:5173/src/main.js"></script>
       <script type="text/javascript">
-        window.postsContentUsername = JSON.parse(
-          "{{ posts_content_username|escapejs }}"
-        );
-        window.users = JSON.parse("{{ users|escapejs }}");
-        window.initialPosts = JSON.Parse("{{ posts|escapejs }}");
+        window.initialPosts = JSON.parse("{{ posts|escapejs }}");
       </script>
     </body>
   </body>
