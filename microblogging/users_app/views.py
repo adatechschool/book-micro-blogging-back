@@ -7,7 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_supabase
 from users_app import templates
-from users_app.models import Post, User, Tag, Follower
+from users_app.models import Post, Tag, Follower, AuthUser
+from django.contrib.auth.models import User
 
 
 @login_required
@@ -87,14 +88,15 @@ def user_profile(request, id):
     posts_list = list(query_user_posts.values('id', 'user_id', 'content', 'parent_id', 'created_at'))
     print(f"🐹 {posts_list}")
     
-    query_user_info = User.objects.get(id=id)
+    query_user_info = AuthUser.objects.get(id=id)
     print(f"🐻 {query_user_info} ")
+    # print(f"🟢 {query_user_info.bio}")
     
     #on créée un dictionnaire User avec les info voulues
     user_info =  {
         'id': query_user_info.id,
         'username': query_user_info.username,
-        'bio': query_user_info.bio
+        'bio': query_user_info.bio,
     }
     
     print(f"🧘‍♂️ {user_info}")
