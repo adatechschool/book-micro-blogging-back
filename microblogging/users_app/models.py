@@ -2,20 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-# class User(models.Model):
-#     email = models.EmailField(unique=True)
-#     username = models.CharField(max_length=180, unique=True)
-#     password = models.CharField(max_length=255)
-#     bio = models.TextField(max_length=500)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return self.username
-
-# class User(models.Model):
-#     bio = models.TextField(max_length=500)
-
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
@@ -34,8 +20,8 @@ class AuthUser(models.Model):
         db_table = 'auth_user'
 
 class Follower(models.Model):
-    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
-    followed = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+    follower = models.ForeignKey(AuthUser, related_name='following', on_delete=models.CASCADE)
+    followed = models.ForeignKey(AuthUser, related_name='followers', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -55,7 +41,7 @@ class Tag(models.Model):
     tag = models.CharField(max_length=180)
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
     content = models.TextField()
     tags = models.ManyToManyField(Tag, related_name="posts")
     parent_id = models.IntegerField(default=None, blank=True, null=True)
