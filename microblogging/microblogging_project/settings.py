@@ -148,7 +148,7 @@ STATICFILES_DIRS = [BASE_DIR / "../microblogging/users_app/frontend/dist", BASE_
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/home'
+LOGIN_REDIRECT_URL = '../..'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
