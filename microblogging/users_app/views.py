@@ -14,7 +14,7 @@ from datetime import datetime
 
 @login_required
 def all_posts(request):
-    posts = Post.objects.select_related('user').all()
+    posts = Post.objects.select_related('user').all().order_by('-created_at')
     print(f"🦀 {posts}")
     
     
