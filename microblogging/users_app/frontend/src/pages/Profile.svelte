@@ -21,6 +21,7 @@
     let likedPosts = new Set();
     
     const toggleLike = (postId) => { 
+        // Basculer le like pour ce post spécifique
         if (likedPosts.has(postId)) {
             likedPosts.delete(postId);
         } else {
