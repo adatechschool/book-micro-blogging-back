@@ -1,7 +1,11 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users_app/style.css' %}">
     <title>My Little Books</title>
 </head>
 
@@ -11,7 +15,7 @@
                 {% if user.is_authenticated %}
                 <li>User: {{ user.get_username }}</li>
                 <li>
-                    <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    <form id="logout-form" method="post" action="{% url 'logout' %}?next=/accounts/login">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-link">Logout</button>
                     </form>
@@ -24,9 +28,9 @@
         <div id="content">
             <!-- {% if user.is_authenticated %} -->
                 <ul>
-                    {% for post in posts %}
+                    <!-- {% for post in posts %} -->
                     <li>
-                        Username : {{ post.user.username }} <br>
+                        Username : {{ post.username }} <br>
                         Post : {{ post.content }} <br>
                         <!-- on récupère tous les tags via la méthode .all()--> 
                         Tags : {% if post.tags.all %}
@@ -39,21 +43,9 @@
                                     Aucun tag
                                 {% endif %}
                                 <br>
-                        Date : {{ post.created_at }} 
-                        <br>
-                        Commentaires: {% if post.parent_id.all %}
-                                            {% for comment in post.parent_id.all %}
-                                                <!--afficher contenu correspondant au parent_id-->
-                                                    {% if comment == post.id.all %}
-                                                        {{post.id.content}} {% if not forloop.last %}, {% endif %}
-                                                    {% endif %}
-                                            {% endfor %}        
-                                        {% else %}
-                                            Aucun commentaire
-                                        {% endif %}             
-                                        <br> 
+                        Date : {{ post.created_at }} <br>
                     </li> <br>
-                    {% endfor %}
+                    <!-- {% endfor %} -->
                 </ul>
                 <!-- {% else %}
                 <p>Please login to see this page.</p> -->

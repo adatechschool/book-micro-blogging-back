@@ -1,54 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users_app/style.css' %}">
     <title>My Little Books</title>
-  </head>
-  <body>
+</head>
+
+<body>
+    <h1>Bienvenue!</h1>
     <div id="side-bar">
-      <ul class="sidebar-nav">
-        {% if user.is_authenticated %}
-        <li>User: {{ user.get_username }}</li>
-        <li>
-          <form id="logout-form" method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-link">Logout</button>
-          </form>
-        </li>
-        {% else %}
-        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+        <ul class="sidebar-nav">
+            {% if user.is_authenticated %}
+            <li>User: {{ user.get_username }}</li>
+            <li>
+                <form id="logout-form" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div id="login-container">
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again. <br></p>
         {% endif %}
-      </ul>
-    </div>
-    <div id="content">
-      {% if form.errors %}
-      <p>Your username and password didn't match. Please try again.</p>
-      {% endif %} {% if next %} {% if user.is_authenticated %}
-      <p>
-        Your account doesn't have access to this page. To proceed, please login
-        with an account that has access.
-      </p>
-      {% else %}
-      <p>Please login to see this page.</p>
-      {% endif %} {% endif %}
-
-      <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <table>
-          <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-          </tr>
-          <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-          </tr>
-        </table>
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-      </form>
-
-      {# Assumes you set up the password_reset view in your URLconf #}
-      <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-    </div>
-  </body>
-</html>
+        
+        {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access. <br></p>
+        {% else %}
+        <p>Please login to see this page. <br></p>
+        {% endif %}
+        {% endif %}
+        
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table id="form-details">
+                <tr>
+                    <!-- <td>{{ form.username.label_tag }}</td> -->
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <!-- <td>{{ form.password.label_tag }}</td> -->
+                    <td>{{ form.password }}</td>
+                </tr>
+            </table>
+            <input id="login-button" type="submit" value="Se connecter">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        
+        {# Assumes you set up the password_reset view in your URLconf #}
+        <p>Pas de compte ?<br>
+            <a href="#"><strong>S'enregistrer</strong></a>
+        </p>
