@@ -39,26 +39,29 @@
   
   <TailwindCSS />
 
-  <main class=" w-full min-h-screen bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% pb-40">
+  <main class="w-full min-h-screen bg-gradient-to-b from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-100%">
     <Header />
     <br>
-    <user class="max-w-[100vh] h-screen px-4 space-y-4 pb-16">
-      <top class=" flex justify-between p-4 font-bold">
+    <user class="max-w-[100vh] h-screen p-4 space-y-4">
+      <top class=" flex justify-between pl-4 font-bold">
         <div class="text-2xl">@{user.username}</div>
       
       <button on:click={lougOutClick} type="button" id="logout" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Se déconnecter</button>
 
       </top>
+      <div class="pl-4 pr-4 border-1 divide-y divide-solid">
       <bio>
-        <p>Bio: {user.bio || 'No bio available'}</p>      </bio>
-      <stats class="divide-x divide-solid ">
+        <p class="mb-4"><br>{user.bio || 'No bio available'}</p>
+      </bio>
+      <stats>
         <div>
-        <p>Followings: {followings.length != 0 ? followings.length : "Tu n'as pas encore de followers"}</p>
+        <p>{followings.length != 0 ? "<b>" + followings.length + "</b> Abonnements" : "Tu n'as pas encore de followers"}</p>
         </div>
       </stats>
+    </div>
     </user>
     <content>
-      <div class="w-full max-w-[100vh] h-screen px-4 space-y-4 pb-16">
+      <div class="w-full max-w-[100vh] h-screen px-4 space-y-4 pt-4 pb-16 border-y-2 divide-solid">
         {#each posts as post}
             <div 
                 class="

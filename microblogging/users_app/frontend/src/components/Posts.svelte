@@ -24,8 +24,8 @@
 
 <TailwindCSS />
 
-<main class="flex justify-center">
-    <div class="w-full max-w-[100vh] h-screen px-4 space-y-4 pb-16">
+<section class="flex justify-center">
+    <div class="w-full max-w-[100vh] h-full px-4 space-y-4 pb-16">
     {#each posts as post}
         <div 
             class="
@@ -71,4 +71,4 @@
         </div>
     {/each}
 </div>
-</main>
+</section>
