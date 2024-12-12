@@ -49,7 +49,7 @@
             <div class="flex justify-between text-white">
                 <button on:click={() => toggleLike(post.id)} aria-label="like">
                     <svg 
-                        class="hover:bg-white hover:bg-opacity-20 rounded-full w-6 h-6 text-gray-800 dark:text-white" 
+                        class="rounded-full w-6 h-6 text-gray-800 dark:text-white" 
                         aria-hidden="true" 
                         xmlns="http://www.w3.org/2000/svg" 
                         width="24" 

@@ -9,7 +9,6 @@
   <body>
     <body>
       <div id="app"></div>
-
       <script type="module" src="http://localhost:5173/@vite/client"></script>
       <script type="module" src="http://localhost:5173/src/main.js"></script>
       <script type="text/javascript">
@@ -18,6 +17,7 @@
         );
         window.users = JSON.parse("{{ users|escapejs }}");
         window.initialPosts = JSON.Parse("{{ posts|escapejs }}");
+        window.user_profile = JSON.parse("{{ data|escapejs }}");
       </script>
     </body>
   </body>

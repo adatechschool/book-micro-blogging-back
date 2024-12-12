@@ -10,7 +10,7 @@ const getCurrentPage = () => {
 
   if (path === "/users") {
     return "users";
-  } else if (path === "/profile") {
+  } else if (path === "/profile/5/") {
     return "profile";
   } else if (path === "/") {
     return "home";

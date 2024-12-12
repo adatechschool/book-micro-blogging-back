@@ -23,7 +23,8 @@ from users_app import views
 urlpatterns = [
     path('', views.all_posts, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/login/', include('django.contrib.auth.urls'), name="login"),
+    path('login/', include('django.contrib.auth.urls'), name="login"),
+    path('logout/', include('django.contrib.auth.urls'), name="logout"),
     path('admin/', admin.site.urls),
     path('users', views.all_posts, name='users'),
     path('profile/<int:id>/', views.user_profile, name='profile'),

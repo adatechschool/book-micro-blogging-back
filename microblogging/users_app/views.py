@@ -72,7 +72,7 @@ def users(request):
 def fetch_users(request):
     data = fetch_from_supabase('users_app_user')
     return render(request, "users.html")
-    return JsonResponse(data, safe=False)
+
 
 @csrf_exempt
 def insert_user(request):
@@ -95,14 +95,14 @@ def user_profile(request, id):
     query_user_posts = Post.objects.filter(user_id=id)
     
     #on transforme le queryset en liste de dictionnaires
-    posts_list = list(query_user_posts.values('id', 'user_id', 'content', 'parent_id', 'created_at'))
+    posts_list = list(query_user_posts.values('id', 'user_id', 'content', 'tags','parent_id'))
     print(f"🐹 {posts_list}")
     
-    for post in posts_list:
-        created_date = post["created_at"]
-        created_date_str = created_date.strftime("%Y-%m-%d %H:%M:%S")
-        post["created_at"] = created_date_str
-     
+    # for post in posts_list:
+    #     created_date = post["created_at"]
+    #     created_date_str = created_date.strftime("%Y-%m-%d %H:%M:%S")
+    #     post["created_at"] = created_date_str
+    
     
     query_user_info = AuthUser.objects.get(id=id)
     user_info = model_to_dict(query_user_info)
@@ -125,21 +125,21 @@ def user_profile(request, id):
     
     #on merge les info des posts et les infos du user dans un dictionnaire:
     response_data = {
-        'user': user_info,
-        'posts': posts_list,
-        'following': following_list
+        'user': json.dumps(user_info),
+        'posts': json.dumps(posts_list),
+        'following': json.dumps(following_list)
+    }
+    
+    context = { 
+        'data': json.dumps(response_data)
     }
 
     print(f"🍋 {response_data}")
-    
-    context = {
-        'data': response_data,
-    }
 
     data_json = json.dumps(response_data)
     print(f"🐼 {data_json}")
     
-    return render(request, 'first_template.html', context)
+    return render(request, 'profile.html', context)
 
 
 # @csrf_exempt
