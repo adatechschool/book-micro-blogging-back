@@ -39,9 +39,8 @@
   
   <TailwindCSS />
 
-  <main class="w-full min-h-screen bg-gradient-to-b from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-100%">
+  <main class="w-full min-h-screen bg-gradient-to-b from-indigo-400 from-10% via-sky-500 via-30% to-emerald-500 to-100%">
     <Header />
-    <br>
     <user class="max-w-[100vh] h-screen p-4 space-y-4">
       <top class=" flex justify-between pl-4 font-bold">
         <div class="text-2xl">@{user.username}</div>

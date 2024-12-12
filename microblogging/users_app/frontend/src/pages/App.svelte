@@ -7,10 +7,9 @@
 
 <TailwindCSS />
 
-<main class="h-fit bg-gradient-to-b from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-100% pb-20">
+<main class="h-fit bg-gradient-to-b from-indigo-400 from-10% via-sky-500 via-30% to-emerald-500 to-100% pb-10">
   
   <Header />
-  <br>
   <Posts />
   <footer class="fixed bottom-0 w-auto bg-blue-200">
     <Menu />

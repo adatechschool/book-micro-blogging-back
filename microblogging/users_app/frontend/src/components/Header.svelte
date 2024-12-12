@@ -4,8 +4,11 @@
 
 <TailwindCSS />
 
-<header class="flex flex-wrap justify-start items-center gap-2 p-2 w-full">
-    <img src="../../static/logo_square.png" alt="logo" class="size-16 rounded-2xl"> 
-    <h1 class="font-6xl font-logo text-2xl color-">My Little Books</h1>
+<header class="flex flex-wrap justify-start items-center gap-2 p-4 w-full">
+    <!-- <img src="../../static/logo_square.png" alt="logo" class="size-16 rounded-2xl">  -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="size-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+    </svg>
+    <h1 class="font-6xl text-2xl text-white"><a href="/" aria-label="home"><strong>bookface</strong></a></h1>
 </header>
 
