@@ -11,7 +11,7 @@
         "model": "users_app.follower",
         "pk": 2,
         "fields": {
-            "followed_id": 20,
+            "followed_id": 3,
             "follower_id":1
         } 
     },
@@ -19,7 +19,7 @@
         "model": "users_app.follower",
         "pk": 3,
         "fields": {
-            "followed_id": 6,
+            "followed_id": 4,
             "follower_id":1
         }   
     },
@@ -35,7 +35,7 @@
         "model": "users_app.follower",
         "pk": 5,
         "fields": {
-            "followed_id": 23,
+            "followed_id": 3,
             "follower_id":2
         } 
     },
@@ -51,8 +51,112 @@
         "model": "users_app.follower",
         "pk": 7,
         "fields": {
-            "followed_id": 18,
+            "followed_id": 5,
             "follower_id":1
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 8,
+        "fields": {
+            "followed_id": 4,
+            "follower_id": 2
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 9,
+        "fields": {
+            "followed_id": 1,
+            "follower_id": 3
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 10,
+        "fields": {
+            "followed_id": 2,
+            "follower_id": 3
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 11,
+        "fields": {
+            "followed_id": 4,
+            "follower_id": 3
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 12,
+        "fields": {
+            "followed_id": 5,
+            "follower_id": 3
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 13,
+        "fields": {
+            "followed_id": 1,
+            "follower_id": 4
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 14,
+        "fields": {
+            "followed_id": 2,
+            "follower_id": 4
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 15,
+        "fields": {
+            "followed_id": 3,
+            "follower_id": 4
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 16,
+        "fields": {
+            "followed_id": 5,
+            "follower_id": 4
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 17,
+        "fields": {
+            "followed_id": 1,
+            "follower_id": 5
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 18,
+        "fields": {
+            "followed_id": 2,
+            "follower_id": 5
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 19,
+        "fields": {
+            "followed_id": 3,
+            "follower_id": 5
+        } 
+    },
+    {
+        "model": "users_app.follower",
+        "pk": 20,
+        "fields": {
+            "followed_id": 4,
+            "follower_id": 5
         } 
     }
 ]
