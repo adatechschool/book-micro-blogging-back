@@ -1,7 +1,11 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users_app/style.css' %}">
     <title>My Little Books</title>
 </head>
 
@@ -16,14 +20,13 @@
                     <button type="submit" class="btn btn-link">Logout</button>
                 </form>
             </li>
-            {% else %}
-            <li><a href="{% url 'login' %}?next=/">Login</a></li>
             {% endif %}
         </ul>
     </div>
     <div id="content">
-        <p>Logged out!</p>
-        <a href="{% url 'login'%}">Click here to login again.</a>
+        <p>Logged out!<br>
+            <a href="{% url 'login'%}">Click here to login again.</a>
+        </p>
     </content>
 </body>
 
