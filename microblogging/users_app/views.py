@@ -9,19 +9,30 @@ from microblogging_project.supabase_utils import fetch_from_supabase, insert_to_
 from users_app import templates
 from users_app.models import Post, Tag, Follower, AuthUser
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 @login_required
 def all_posts(request):
     posts = Post.objects.select_related('user').all()
     print(f"🦀 {posts}")
+    
+    
     list_posts = []
     
     for post in posts:
         p = model_to_dict(post)
         print(f"🪲 {p}")
+        print(f"{post.created_at}")
         p["tags"] = []
         p["user"] = model_to_dict(post.user)["username"]
+        p["user_id"] = model_to_dict(post.user)["id"]
+        p["post_id"] = model_to_dict(post)["id"]
+        publish_date = post.created_at
+        publish_date_str = publish_date.strftime("%Y-%m-%d %H:%M:%S")
+        print(f"🐣 {publish_date_str}")
+        print(type(publish_date_str))
+        p["created_at"] = publish_date_str
         for tag in post.tags.all():
             p["tags"].append(tag.tag)
         list_posts.append(p)
@@ -87,6 +98,12 @@ def user_profile(request, id):
     posts_list = list(query_user_posts.values('id', 'user_id', 'content', 'parent_id', 'created_at'))
     print(f"🐹 {posts_list}")
     
+    for post in posts_list:
+        created_date = post["created_at"]
+        created_date_str = created_date.strftime("%Y-%m-%d %H:%M:%S")
+        post["created_at"] = created_date_str
+     
+    
     query_user_info = AuthUser.objects.get(id=id)
     user_info = model_to_dict(query_user_info)
     print(f"🐻 {user_info} ")
@@ -100,12 +117,11 @@ def user_profile(request, id):
     }
     
     print(f"🧘‍♂️ {user_info}")
-    print(type(user_info))
+
     
     query_following = Follower.objects.filter(follower_id=id)
-    
     following_list = list(query_following.values('followed_id', 'follower_id'))
-    print(f"🍓 {following_list}")
+    
     
     #on merge les info des posts et les infos du user dans un dictionnaire:
     response_data = {
@@ -113,11 +129,17 @@ def user_profile(request, id):
         'posts': posts_list,
         'following': following_list
     }
-    
+
     print(f"🍋 {response_data}")
-    print(type(response_data))
     
-    return JsonResponse(response_data, safe=True)
+    context = {
+        'data': response_data,
+    }
+
+    data_json = json.dumps(response_data)
+    print(f"🐼 {data_json}")
+    
+    return render(request, 'first_template.html', context)
 
 
 # @csrf_exempt

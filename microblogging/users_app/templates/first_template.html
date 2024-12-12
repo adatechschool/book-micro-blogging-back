@@ -1,62 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>My Little Books</title>
-  </head>
+</head>
 
-  <body>
-    <div id="side-bar">
-      <ul class="sidebar-nav">
-        {% if user.is_authenticated %}
-        <li>User: {{ user.get_username }}</li>
-        <li>
-          <form id="logout-form" method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-link">Logout</button>
-          </form>
-        </li>
-        <!-- {% else %}
+    <body>
+        <div id="side-bar">
+            <ul class="sidebar-nav">
+                {% if user.is_authenticated %}
+                <li>User: {{ user.get_username }}</li>
+                <li>
+                    <form id="logout-form" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link">Logout</button>
+                    </form>
+                </li>
+                <!-- {% else %}
                 <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li> -->
-        {% endif %}
-      </ul>
-    </div>
-    <div id="content">
-      <!-- {% if user.is_authenticated %} -->
-      <ul>
-        {% for post in posts %}
-        <li>
-          Username : {{ post.user.username }} <br />
-          Post : {{ post.content }} <br />
-
-          <!-- on récupère tous les tags via la méthode .all()-->
-          Tags : {% if post.tags.all %}
-
-          <!-- on parcourt les tags et on affiche chacun d'entre eux-->
-          {% for tag in post.tags.all %}
-
-          <!-- ajout d'une gestion de virugle si plusieurs tags-->
-          {{tag.tag}} {% if not forloop.last %}, {% endif %} {% endfor %}
-          {%else%} Aucun tag {% endif %}
-
-          <br />
-          Date : {{ post.created_at }}
-
-          <br />
-          Commentaires: {% if post.parent_id.all %} {% for comment in
-          post.parent_id.all %}
-
-          <!--afficher contenu correspondant au parent_id-->
-          {% if comment == post.id.all %} {{post.id.content}} {% if not
-          forloop.last %}, {% endif %} {% endif %} {% endfor %} {% else %} Aucun
-          commentaire {% endif %}
-          <br />
-        </li>
-        <br />
-        {% endfor %}
-      </ul>
-      <!-- {% else %}
+                {% endif %}
+            </ul>
+        </div>
+        <div id="content">
+            <!-- {% if user.is_authenticated %} -->
+                <ul>
+                    {% for post in posts %}
+                    <li>
+                        Username : {{ post.user.username }} <br>
+                        Post : {{ post.content }} <br>
+                        <!-- on récupère tous les tags via la méthode .all()--> 
+                        Tags : {% if post.tags.all %}
+                        <!-- on parcourt les tags et on affiche chacun d'entre eux-->
+                                    {% for tag in post.tags.all %} 
+                                    <!-- ajout d'une gestion de virugle si plusieurs tags-->
+                                        {{tag.tag}} {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    Aucun tag
+                                {% endif %}
+                                <br>
+                        Date : {{ post.created_at }} 
+                        <br>
+                        Commentaires: {% if post.parent_id.all %}
+                                            {% for comment in post.parent_id.all %}
+                                                <!--afficher contenu correspondant au parent_id-->
+                                                    {% if comment == post.id.all %}
+                                                        {{post.id.content}} {% if not forloop.last %}, {% endif %}
+                                                    {% endif %}
+                                            {% endfor %}        
+                                        {% else %}
+                                            Aucun commentaire
+                                        {% endif %}             
+                                        <br> 
+                    </li> <br>
+                    {% endfor %}
+                </ul>
+                <!-- {% else %}
                 <p>Please login to see this page.</p> -->
-      <!-- {% endif %} -->
-    </div>
-  </body>
+            {% endif %}
+        </div>
+    </body> 
+
 </html>
