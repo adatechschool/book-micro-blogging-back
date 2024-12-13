@@ -38,75 +38,68 @@
   </script>
   
   <TailwindCSS />
-
   <main class="w-full min-h-screen bg-gradient-to-b from-indigo-400 from-10% via-sky-500 via-30% to-emerald-500 to-100%">
-    <Header />
-    <user class="max-w-[100vh] h-screen p-4 space-y-4">
-      <top class=" flex justify-between pl-4 font-bold">
-        <div class="text-2xl">@{user.username}</div>
-      
-      <button on:click={lougOutClick} type="button" id="logout" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Se déconnecter</button>
 
-      </top>
-      <div class="pl-4 pr-4 border-1 divide-y divide-solid">
-      <bio>
-        <p class="mb-4"><br>{user.bio || 'No bio available'}</p>
-      </bio>
-      <stats>
-        <div>
-        <p>{followings.length != 0 ? "<b>" + followings.length + "</b> Abonnements" : "Tu n'as pas encore de followers"}</p>
-        </div>
-      </stats>
-    </div>
-    </user>
-    <content>
-      <div class="w-full max-w-[100vh] h-screen px-4 space-y-4 pt-4 pb-16 border-y-2 divide-solid">
-        {#each posts as post}
-            <div 
-                class="
-                    bg-white bg-opacity-20 
-                    backdrop-blur-md 
-                    rounded-lg 
-                    border 
-                    border-white border-opacity-20 
-                    shadow-lg
-                    p-4
-                "
-            >
-                <div class="mb-3">
-                    <span class="font-bold text-white">@{user.username}</span>
-                </div>
-                
-                <p class="text-white mb-4">
-                    {post.content}
-                </p>
-                
-                <div class="flex justify-between text-white">
-                    <button on:click={() => toggleLike(post.id)} aria-label="like">
-                        <svg 
-                            class="rounded-full w-6 h-6 text-gray-800 dark:text-white" 
-                            aria-hidden="true" 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            width="24" 
-                            height="24" 
-                            fill={likedPosts.has(post.id) ? "currentColor" : "none"} 
-                            viewBox="0 0 24 24"
-                        >
-                            <path 
-                                stroke="currentColor" 
-                                stroke-linecap="round" 
-                                stroke-linejoin="round" 
-                                stroke-width="2" 
-                                d={likedPosts.has(post.id) ? fullLike : emptyLike}
-                            />
-                        </svg>
-                    </button>
-                    <button class="hover:bg-white hover:bg-opacity-20 rounded-full">{post.tags}</button>
-                </div>
+    <Header />
+        <div id=user class="px-4 text-white flex flex-col">
+            <div id=top class="w-full flex justify-between items-center">
+                <h3 class="text-xl font-bold">@{user.username}</h3>
+                <button on:click={lougOutClick} type="button" id="logout" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Se déconnecter</button>
             </div>
-        {/each}
-    </div>
-    </content>
+            <div id="profile-details" class="pb-1">
+                <p class="pt-2 pb-4"><i>{user.bio || 'No bio available'}</i></p>
+                <p><strong>{followings.length != 0 ? + followings.length + " abonnements" : "Tu n'as pas encore de followers"}</strong></p>
+            </div>
+        </div>
+        <div class="separator my-5 mx-auto h-0.5 bg-black opacity-5 w-full"></div>
+        <section class="flex justify-center">
+            <div class="w-full max-w-[100vh] h-full px-4 space-y-4 pb-16">
+
+                {#each posts as post}
+                    <div 
+                        class="
+                            bg-white bg-opacity-20 
+                            backdrop-blur-md 
+                            rounded-lg 
+                            border 
+                            border-white border-opacity-20 
+                            shadow-lg
+                            p-4
+                        "
+                    >
+                        <div class="mb-3">
+                            <span class="font-bold text-white">@{user.username}</span>
+                        </div>
+                        
+                        <p class="text-white mb-4">
+                            {post.content}
+                        </p>
+                        
+                        <div class="flex justify-between text-white">
+                            <button on:click={() => toggleLike(post.id)} aria-label="like">
+                                <svg 
+                                    class="rounded-full w-6 h-6 text-gray-800 dark:text-white" 
+                                    aria-hidden="true" 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="24" 
+                                    height="24" 
+                                    fill={likedPosts.has(post.id) ? "currentColor" : "none"} 
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path 
+                                        stroke="currentColor" 
+                                        stroke-linecap="round" 
+                                        stroke-linejoin="round" 
+                                        stroke-width="2" 
+                                        d={likedPosts.has(post.id) ? fullLike : emptyLike}
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                {/each}
+            </div>
+        </section>
     <footer class="fixed bottom-0 w-auto bg-blue-200">
       <Menu />
     </footer>
