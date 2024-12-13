@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,24 +9,18 @@
 </head>
 
 <body>
-    <div id="side-bar">
-        <ul class="sidebar-nav">
-            {% if user.is_authenticated %}
-            <li>User: {{ user.get_username }}</li>
-            <li>
-                <form id="logout-form" method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-link">Logout</button>
-                </form>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-    <div id="content">
-        <p>Logged out!<br>
-            <a href="{% url 'login'%}">Click here to login again.</a>
+    <h2>À bientôt !</h2>
+    <div id="login-container">    
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input id="login-button" type="submit" value="Se connecter" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    
+        <p>
+            Pas de compte ? <a href="#"><strong>S'inscrire</strong></a>
         </p>
-    </content>
+    </div>
 </body>
 
 </html>
